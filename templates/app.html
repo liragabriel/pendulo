@@ -1,0 +1,66 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="static/fontAwesome/css/all.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+    </head>
+    <body>
+        <div class="row">
+            <div class="col-lg-6 p-4">
+                <iframe src="https://phet.colorado.edu/sims/html/pendulum-lab/latest/pendulum-lab_en.html" width="640" height="480"></iframe>
+            </div>
+            <div class="col-lg-6 p-4">
+
+                <form action="/resposta" method="POST">
+                    <p class="mb-4">T = Tempo; R1 = Resultado 1; R2 = Resultado 2; R3 = Resultado 3</p>
+                    <p><a href="#" id="addScnt">Adicionar mais campos</a></p>
+
+                    <div id="p_scents">
+                        <p class="input-group mb-4"> <span class="input-group-text">T</span>
+                            <input type="text" id="time" name="time0" size="2">
+                            <span class="input-group-text">R1</span>
+                            <input type="text" id="resulta0" name="resulta0" size="2"/>
+                            <span class="input-group-text">R2</span>
+                            <input type="text" id="resultb0" name="resultb0" size="2"/>
+                            <span class="input-group-text">R3</span>
+                            <input type="text" id="resultb0" name="resultc0" size="2"/>
+                        </p>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                </form>
+
+            </div>
+        </div>
+    </body>
+    <script>
+        $(function() {
+            var scntDiv = $('#p_scents');
+            var i = $('#p_scents p').size();
+
+            $('#addScnt').live('click', function() {
+                $('\
+                <p class="input-group mb-4"> <span class="input-group-text">T</span>\
+                    <input type="text" id="time" name="time'+i+'" size="2">\
+                    <span class="input-group-text">R1</span>\
+                    <input type="text" id="result1" name="resulta'+i+'" size="2"/>\
+                    <span class="input-group-text">R2</span>\
+                    <input type="text" id="result2" name="resultb'+i+'" size="2"/>\
+                    <span class="input-group-text">R3</span>\
+                    <input type="text" id="result3" name="resultc'+i+'" size="2"/>\
+                    <a href="#" id="remScnt"> <i class="fas fa-times text-danger"></i></a>\
+                </p>').appendTo(scntDiv);
+                i++;
+                return false;
+            });
+
+            $('#remScnt').live('click', function() { 
+                if( i > 1 ) {
+                    $(this).parents('p').remove();
+                    i--;
+                }
+                return false;
+            });
+        });
+    </script>
+</html>
